@@ -1,7 +1,6 @@
-package com.zsl0.util;
+package com.zsl0.util.sql;
 
 import cn.hutool.core.collection.ListUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

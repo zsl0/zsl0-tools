@@ -1,4 +1,4 @@
-package com.zsl0.util;
+package com.zsl0.util.auth;
 
 import cn.hutool.core.date.DateUtil;
 import com.sun.istack.internal.Nullable;

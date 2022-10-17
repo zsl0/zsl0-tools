@@ -1,4 +1,4 @@
-package com.zsl0.util;
+package com.zsl0.util.auth;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;

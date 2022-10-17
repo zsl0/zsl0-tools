@@ -1,4 +1,4 @@
-package com.zsl0.util;
+package com.zsl0.util.auth;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
