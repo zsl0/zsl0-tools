@@ -54,7 +54,7 @@ public class ExcelUtil {
         //获取回传的输出流 并输出文件
         ServletOutputStream outputStream = resp.getOutputStream();
         out.write(outputStream);
-        log.debug("download '{}' completion", filename);
+        log.debug("send '{}' completion", filename);
     }
 
 }
