@@ -2,6 +2,8 @@ package com.zsl0.util;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.*;
 
@@ -9,8 +11,9 @@ import java.util.concurrent.*;
  * @author zsl0
  * create on 2022/10/16 20:20
  */
-@Slf4j
 public class AsyncUtil {
+
+    static Logger log = LoggerFactory.getLogger(AsyncUtil.class);
 
     public static void main(String[] args) {
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors() / 2 + 1,

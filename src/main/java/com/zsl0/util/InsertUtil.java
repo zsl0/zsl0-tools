@@ -2,6 +2,8 @@ package com.zsl0.util;
 
 import cn.hutool.core.collection.ListUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +13,10 @@ import java.util.function.Consumer;
  * @author zsl0
  * create on 2022/10/15 12:16
  */
-@Slf4j
 public class InsertUtil {
+
+    static Logger log = LoggerFactory.getLogger(InsertUtil.class);
+
 
     /**
      * 批量插入
