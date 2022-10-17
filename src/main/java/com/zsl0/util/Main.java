@@ -4,7 +4,7 @@ import java.util.UUID;
 
 /**
  * @author zsl0
- * @date ${DATE} ${TIME}
+ * create on 2022/10/15 12:16
  */
 public class Main {
     public static void main(String[] args) {

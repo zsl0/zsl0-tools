@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 
 /**
  * @author zsl0
- * @date 2022/10/15 12:16
+ * create on 2022/10/15 12:16
  */
 @Slf4j
 public class InsertUtil {
