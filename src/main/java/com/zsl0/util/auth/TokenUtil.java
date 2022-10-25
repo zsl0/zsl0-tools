@@ -1,7 +1,6 @@
 package com.zsl0.util.auth;
 
 import cn.hutool.core.date.DateUtil;
-import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +48,6 @@ public class TokenUtil {
     /**
      * 获取access_token存储uuid
      */
-    @Nullable
     public static String getAccessTokenUuid(String token) {
         String subject = JWTUtil.getClaim(token, "sub");
         if (subject == null || !"access_token".equals(subject)) {
@@ -61,7 +59,6 @@ public class TokenUtil {
     /**
      * 获取access_token存储Authentication信息
      */
-    @Nullable
     public static String getAccessTokenAuthentication(String token) {
         String subject = JWTUtil.getClaim(token, "sub");
         if (subject == null || !"access_token".equals(subject)) {
@@ -74,7 +71,6 @@ public class TokenUtil {
     /**
      * 获取refresh_token存储uuid
      */
-    @Nullable
     public static String getRefreshTokenUuid(String token) {
         String subject = JWTUtil.getClaim(token, "sub");
         if (subject == null || !"refresh_token".equals(subject)) {
@@ -94,7 +90,6 @@ public class TokenUtil {
     /**
      * 获取过期时间
      */
-    @Nullable
     public static Long getExpire(String token) {
         return JWTUtil.getExpire(token);
     }
