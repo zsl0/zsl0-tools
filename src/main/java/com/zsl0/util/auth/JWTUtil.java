@@ -7,7 +7,6 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +39,6 @@ public class JWTUtil {
     /**
      * 生成token
      */
-    @Nullable
     public static String generateToken(String subject, Date expire, String uuid) {
 //        Assert.notNull(secret, "secret(密钥) 不能为空");
 //        Assert.notNull(issuer, "issuer(发行人) 不能为空");
@@ -68,7 +66,6 @@ public class JWTUtil {
      * @param authenticationJson 认证信息json字符串
      * @return
      */
-    @Nullable
     public static String generateToken(String subject, Date expire, String uuid, String authenticationJson) {
 //        Assert.notNull(secret, "secret(密钥) 不能为空");
 //        Assert.notNull(issuer, "issuer(发行人) 不能为空");
@@ -91,7 +88,6 @@ public class JWTUtil {
     /**
      * 获取过期时间
      */
-    @Nullable
     public static Long getExpire(String token) {
         DecodedJWT decodedJWT = verity(token);
         return decodedJWT == null ? null : decodedJWT.getExpiresAt().getTime();
@@ -101,7 +97,6 @@ public class JWTUtil {
     /**
      * 获取Payload信息
      */
-    @Nullable
     public static String getClaim(String token, String key) {
         Map<String, Claim> claims = getClaims(token);
         return claims == null ? null : claims.get(key).asString();
@@ -110,7 +105,6 @@ public class JWTUtil {
     /**
      * 获取Payload信息
      */
-    @Nullable
     public static Map<String, Claim> getClaims(String token) {
         DecodedJWT decodedJWT = verity(token);
         return decodedJWT == null ? null : decodedJWT.getClaims();
@@ -119,7 +113,6 @@ public class JWTUtil {
     /**
      * 解析token
      */
-    @Nullable
     private static DecodedJWT verity(String token) {
 //        Assert.notNull(secret, "secret(密钥) 不能为空");
 //        Assert.notNull(issuer, "issuer(发行人) 不能为空");

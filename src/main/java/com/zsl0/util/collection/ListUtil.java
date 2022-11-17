@@ -30,4 +30,17 @@ public class ListUtil {
         return map;
     }
 
+    /**
+     * 自定义List转Map，key为Function返回，value为list元素
+     */
+    public static <T, K> Map<K, T> toMap(List<T> list, Function<T, K> key) {
+        Map<K, T> map = new HashMap<>(list.size());
+        for (T data : list) {
+            K mapKey = key.apply(data);
+            map.put(mapKey, data);
+        }
+
+        return map;
+    }
+
 }
