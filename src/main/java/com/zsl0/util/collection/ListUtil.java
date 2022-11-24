@@ -3,9 +3,7 @@ package com.zsl0.util.collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -41,6 +39,21 @@ public class ListUtil {
         }
 
         return map;
+    }
+
+
+    /**
+     * 集合浅copy
+     */
+    public static <T> List<T> copy(List<T> source) {
+        List<T> dest = new ArrayList<>();
+
+        if (Objects.isNull(source)) {
+            return dest;
+        }
+
+        dest.addAll(source);
+        return dest;
     }
 
 }
