@@ -1,13 +1,12 @@
 package com.zsl0.util.freemarker;
 
+import cn.hutool.core.io.IoUtil;
 import freemarker.template.*;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -16,40 +15,36 @@ import java.util.Map;
  *  2.编写样例说明
  *  3.优化process()方法
  *
+ *  *         案例：
+ *  *          test.ftl 文件内容：
+ *  *              username: ${user.name}
+ *  *              password: ${user.password}
+ * <div>
+ *
+ *
+ *         // 创建Configuration，建议使用单例模式
+ *         Configuration configuration = getConfiguration("src/main/resources/templates");
+ *
+ *         // 获取模版
+ *         Template template = getTemplate("test.ftl", configuration);
+ *
+ *         // 构建数据
+ *         Map<String, Object> root = new HashMap<>();
+ *         Map<String, Object> user = new HashMap<>();
+ *         root.put("user", user);
+ *         user.put("name", "zsl0");
+ *         user.put("password", "zsl");
+ *
+ *         // 生成执行后的数据数组
+ *         byte[] process = process(root, template);
+ *         String s = new String(process, StandardCharsets.UTF_8);
+ *         System.out.println(s);
+ * </div>
+ *
  * @author zsl0
  * created on 2022/11/28 21:17
  */
 public class FreemarkerUtil {
-
-
-    public static void main(String[] args) {
-        /**
-         * 案例：
-         *
-         * test.ftl 文件内容：
-         *  username: ${user.name}
-         *  password: ${user.password}
-         *
-         */
-        // 创建Configuration，建议使用单例模式
-        Configuration configuration = getConfiguration("src/main/resources/templates");
-
-        // 获取模版
-        Template template = getTemplate("test.ftl", configuration);
-
-        // 构建数据
-        Map<String, Object> root = new HashMap<>();
-        Map<String, Object> user = new HashMap<>();
-        root.put("user", user);
-        user.put("name", "zsl0");
-        user.put("password", "zsllll");
-
-        // 生成执行后的数据数组
-        byte[] process = process(root, template);
-        String s = new String(process, StandardCharsets.UTF_8);
-        System.out.println(s);
-    }
-
 
     /**
      * 创建Configuration,处理创建和 缓存 预解析模板(比如 Template 对象)的工作
@@ -111,13 +106,12 @@ public class FreemarkerUtil {
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(baos);
         try {
             template.process(objectModel, outputStreamWriter);
-        } catch (TemplateException e) {
+        } catch (TemplateException | IOException e) {
             throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } finally {
+            IoUtil.close(outputStreamWriter);
         }
-        byte[] bytes = baos.toByteArray();
-        return bytes;
+        return baos.toByteArray();
     }
 
 }
