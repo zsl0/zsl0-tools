@@ -7,6 +7,10 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -112,6 +116,50 @@ public class FreemarkerUtil {
             IoUtil.close(outputStreamWriter);
         }
         return baos.toByteArray();
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Map<String, Object> objectModel = new HashMap<>();
+        Map<String, Object> forecast = new HashMap<>();
+        Map<String, Object> create = new HashMap<>();
+
+        List<Map<String, Object>> weathers = new ArrayList<>();
+
+        objectModel.put("forecast", forecast);
+        objectModel.put("weathers", weathers);
+        objectModel.put("company_name", "杭州辰青和业科技有限公司");
+        objectModel.put("create", create);
+
+        forecast.put("year", 2022);
+        forecast.put("month", 12);
+        forecast.put("day", 11);
+
+        for (int i = 0; i < 2; i++) {
+            Map<String, Object> weather = new HashMap<>();
+
+            weather.put("day", 21 + i);
+            weather.put("phenomena", "多云");
+            weather.put("maxTp", 11 - i);
+            weather.put("minTp", -1 + i);
+            weather.put("level", "中雨");
+
+            weathers.add(weather);
+        }
+
+
+        create.put("year", "2022");
+        create.put("month", 12);
+        create.put("day", 11);
+
+
+        Configuration configuration = getConfiguration("src/main/resources/templates");
+        Template template = getTemplate("weather_forecast_48_hour.ftl", configuration);
+        byte[] content = process(objectModel, template);
+//        System.out.println(new String(content, StandardCharsets.UTF_8));
+        FileOutputStream fos = new FileOutputStream("/Users/zsl0/Desktop/abc.doc");
+        IoUtil.copy(new ByteArrayInputStream(content), fos);
+
+
     }
 
 }

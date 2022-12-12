@@ -44,7 +44,7 @@ public class MailUtil {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         try {
-            mimeMessageHelper.setFrom("XXX名称<" + from + ">");
+            mimeMessageHelper.setFrom("zsl0<" + from + ">");
             mimeMessageHelper.setTo(to);
             mimeMessageHelper.setSubject(subject);
             mimeMessageHelper.setText(text, true);
