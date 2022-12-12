@@ -46,16 +46,4 @@ public class FileUtil {
         }
     }
 
-    public static void setResponseByDownload(HttpServletRequest req, HttpServletResponse resp, String filename) throws UnsupportedEncodingException {
-        //在回传前，通过响应头告诉客户端返回的数据类型
-        resp.setContentType("application/octet-stream");
-        //告诉客户端收到的数据是用于下载使用（通过响应头）
-        if (req.getHeader("User-Agent").contains("Firefox")) {
-            //火狐浏览器 Base64
-            resp.setHeader("Content-Disposition", "attachment; filename==?UTF-8?B?" + Arrays.toString(Base64.getEncoder().encode(filename.getBytes(StandardCharsets.UTF_8))) + "?=");
-        } else {
-            //谷歌 IE URLEncoder
-            resp.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(filename, "UTF-8"));
-        }
-    }
 }
