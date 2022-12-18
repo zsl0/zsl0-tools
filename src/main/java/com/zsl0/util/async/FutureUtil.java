@@ -19,6 +19,10 @@ public class FutureUtil {
 
     /**
      * 获取future结果，如果为null,创建空对象
+     * @param future future对象
+     * @param clazz 返回class对象类型
+     * @return future中获取到对象
+     * @param <T> clazz对象范型
      */
     public static <T> T futureGetObject(Future<T> future, Class<T> clazz) {
         T t = null;
@@ -44,6 +48,9 @@ public class FutureUtil {
 
     /**
      * 获取future结果，如果为null,创建空对象
+     * @param future future对象集合
+     * @return future集合获取到的结果集
+     * @param <T> 结果范型
      */
     public static <T> List<T> futureGetList(Future<List<T>> future) {
         List<T> t = null;

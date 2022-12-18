@@ -53,13 +53,18 @@ public class CryptoUtil {
     /**
      * 获取密钥
      * @param key 盐
-     * @return
+     * @return key对象
      */
     public static Key getKey(String key) {
 //        return new SecretKeySpec(key.getBytes(), ALGORITHM);
         return getDESedeKey(key.getBytes());
     }
 
+    /**
+     * 获取DESede密钥
+     * @param key 盐
+     * @return DESede密钥
+     */
     public static Key getDESedeKey(byte[] key) {
         Key secretKey = null;
         try {
@@ -75,7 +80,7 @@ public class CryptoUtil {
     /**
      * 对密文解密
      * @param decode 密文
-     * @return
+     * @return 解码后字节数组
      */
     public static byte[] decode(byte[] decode) {
         byte[] result = new byte[0];
@@ -95,7 +100,7 @@ public class CryptoUtil {
     /**
      * Base64密文解密
      * @param baseDecode Base64编码密文
-     * @return
+     * @return 解密后字符串
      */
     public static String decodeBase64(String baseDecode) {
         // Base64解码 (转String会出现填充的问题导致解密出错)

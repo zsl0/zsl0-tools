@@ -1,6 +1,8 @@
 package com.zsl0.util.spring;
 
 import cn.hutool.core.io.IoUtil;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Objects;
 
 /**
  * @author zsl0
@@ -21,6 +24,10 @@ public class WebUtil {
 
     /**
      * 文件下载 设置相应头信息
+     * @param req ServletRequest对象
+     * @param resp ServletResponse对象
+     * @param filename 文件名
+     * @throws UnsupportedEncodingException 不支持的编码异常
      */
     public static void setResponseByDownload(HttpServletRequest req, HttpServletResponse resp, String filename) throws UnsupportedEncodingException {
         //在回传前，通过响应头告诉客户端返回的数据类型
@@ -53,5 +60,32 @@ public class WebUtil {
         outputStream.flush();
         IoUtil.close(outputStream);
         IoUtil.close(is);
+    }
+
+
+    /**
+     * 获取ServletRequest(根据springboot获取)
+     * @return ServletResponse对象
+     */
+    public static HttpServletRequest getRequest() {
+        return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+    }
+
+
+    /**
+     * 获取ServletResponse(根据springboot获取)
+     * @return ServletResponse对象
+     */
+    public static HttpServletResponse getResponse() {
+        return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getResponse();
+    }
+
+    /**
+     * 获取ip地址
+     * @return ip字符串
+     */
+    public static String getIp() {
+        HttpServletRequest request = getRequest();
+        return request.getHeader("host");
     }
 }

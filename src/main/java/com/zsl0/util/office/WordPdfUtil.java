@@ -9,6 +9,8 @@ import com.aspose.words.License;
 import com.aspose.words.SaveFormat;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * @author zsl0
@@ -17,6 +19,7 @@ import java.io.*;
 public class WordPdfUtil {
     /**
      * 获取破解码文件内容
+     * @return
      */
     public static boolean getLicense() {
         boolean result = false;
@@ -40,6 +43,7 @@ public class WordPdfUtil {
      *
      * @param word 原文件地址
      * @param pdf  保存的pdf文件地址
+     * @return
      */
     public static void wordConvertPdf(String word, String pdf) {
         // 验证License 若不验证则转化出的pdf文档会有水印产生
@@ -73,6 +77,7 @@ public class WordPdfUtil {
      *
      * @param wordis 原文件地址
      * @param pdfos  保存的pdf文件地址
+     * @return
      */
     public static void wordConvertPdf(InputStream wordis, OutputStream pdfos) {
         // 验证License 若不验证则转化出的pdf文档会有水印产生
@@ -95,13 +100,13 @@ public class WordPdfUtil {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         InputStream resourceAsStream = WordPdfUtil.class.getClassLoader().getResourceAsStream("static/abc.doc");
         long start = System.currentTimeMillis();
 //            wordConvertPdf("/Users/zsl0/IdeaProjects/gitProjects/zsl0-tools/src/main/resources/static/abc.doc", "/Users/zsl0/Desktop/abc.pdf");
         ByteArrayOutputStream pdfos = new ByteArrayOutputStream();
         wordConvertPdf(resourceAsStream, pdfos);
         System.out.println(System.currentTimeMillis() - start + " ms, bytesize=" + pdfos.toByteArray().length);
-
+        IoUtil.copy(new ByteArrayInputStream(pdfos.toByteArray()), Files.newOutputStream(Paths.get("/Users/zsl0/Desktop/abc.pdf")));
     }
 }

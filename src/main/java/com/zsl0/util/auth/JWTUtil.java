@@ -22,10 +22,14 @@ public class JWTUtil {
 
     static Logger log = LoggerFactory.getLogger(JWTUtil.class);
 
-    // todo 参数需要初始化
-    // 密钥
+    /**
+     * 密钥 todo 参数需要初始化
+     */
     public static String secret = "pacx:zsl:secret:123456789abc";
-    // 发行人
+
+    /**
+     * 发行人
+     */
     public static String issuer = "pacx";
 
 
