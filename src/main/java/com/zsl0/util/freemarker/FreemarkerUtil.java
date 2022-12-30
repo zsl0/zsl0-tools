@@ -61,26 +61,24 @@ public class FreemarkerUtil {
 
     public static Configuration getConfiguration(String directory, Version version, Charset charset, TemplateExceptionHandler templateExceptionHandler) {
         Configuration configuration = null;
-        try {
-            configuration = new Configuration(version);
+        configuration = new Configuration(version);
+//
+//            File dirFile = Paths.get(directory).toFile();
+//
+//            // 判断参数路径是否存在
+//            if (!dirFile.exists()) {
+//                throw new RuntimeException(String.format("Directory does not exist！ dir=%s", directory));
+//            }
+//
+//            // 设置加载模版路径
+//            configuration.setDirectoryForTemplateLoading(dirFile);
+        // 设置加载模版路径
+        configuration.setClassForTemplateLoading(FreemarkerUtil.class, directory);
 
-            File dirFile = Paths.get(directory).toFile();
+        // 设置默认编码格式
+        configuration.setDefaultEncoding(charset.name());
 
-            // 判断参数路径是否存在
-            if (!dirFile.exists()) {
-                throw new RuntimeException(String.format("Directory does not exist！ dir=%s", directory));
-            }
-
-            // 设置加载模版路径
-            configuration.setDirectoryForTemplateLoading(dirFile);
-
-            // 设置默认编码格式
-            configuration.setDefaultEncoding(charset.name());
-
-            configuration.setTemplateExceptionHandler(templateExceptionHandler);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        configuration.setTemplateExceptionHandler(templateExceptionHandler);
         return configuration;
     }
 

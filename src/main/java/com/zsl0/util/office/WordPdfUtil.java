@@ -87,8 +87,9 @@ public class WordPdfUtil {
         //判断是否windows系统，Linux要读取字体，否则pdf字体为方格
         OsInfo osInfo = SystemUtil.getOsInfo();
         if (osInfo.isLinux()) {
-            String path = WordPdfUtil.class.getClassLoader().getResource("static/simsun.ttc").getPath();
-            FontSettings.getDefaultInstance().setFontsFolder(path, true);
+//            String path = WordPdfUtil.class.getClassLoader().getResource("static/simsun.ttc").getPath();
+//            FontSettings.getDefaultInstance().setFontsFolder(path, true);
+            FontSettings.getDefaultInstance().setFontsFolder("/usr/share/fonts", true);
         }
         try {
             // Address是将要被转化的word文档
