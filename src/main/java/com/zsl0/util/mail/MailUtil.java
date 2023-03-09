@@ -13,10 +13,10 @@ import java.util.Map;
 /**
  * #    邮箱配置
  * spring:
- * mail:
- * host: smtp.163.com
- * password: xxxx
- * username: xxxxx
+ *  mail:
+ *    host: smtp.163.com
+ *    username: xxxxx
+ *    password: xxxx
  *
  * @author zsl
  * created on 2021/12/29 16:32
@@ -36,7 +36,7 @@ public class MailUtil {
      * @param javaMailSender 发送对象
      * @return 成功返回true，反之false
      */
-    private boolean sendEmail(String from, String to, String subject, String text, boolean html, JavaMailSender javaMailSender) {
+    private static boolean sendEmail(String from, String to, String subject, String text, boolean html, JavaMailSender javaMailSender) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         try {
@@ -66,7 +66,7 @@ public class MailUtil {
      * @param javaMailSender 发送对象
      * @return 成功返回true，反之false
      */
-    private boolean sendEmail(String from, String to, String subject, String text, boolean html, Map<String, FileSystemResource> attachments, JavaMailSender javaMailSender) {
+    private static boolean sendEmail(String from, String to, String subject, String text, boolean html, Map<String, FileSystemResource> attachments, JavaMailSender javaMailSender) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
