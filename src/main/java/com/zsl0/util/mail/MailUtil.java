@@ -36,7 +36,7 @@ public class MailUtil {
      * @param javaMailSender 发送对象
      * @return 成功返回true，反之false
      */
-    private static boolean sendEmail(String from, String to, String subject, String text, boolean html, JavaMailSender javaMailSender) {
+    public static boolean sendEmail(String from, String to, String subject, String text, boolean html, JavaMailSender javaMailSender) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         try {
@@ -66,7 +66,7 @@ public class MailUtil {
      * @param javaMailSender 发送对象
      * @return 成功返回true，反之false
      */
-    private static boolean sendEmail(String from, String to, String subject, String text, boolean html, Map<String, FileSystemResource> attachments, JavaMailSender javaMailSender) {
+    public static boolean sendEmail(String from, String to, String subject, String text, boolean html, Map<String, FileSystemResource> attachments, JavaMailSender javaMailSender) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
