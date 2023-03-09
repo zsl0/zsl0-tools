@@ -34,8 +34,9 @@ public class MailUtil {
      * @param text           邮件内容
      * @param html           内容是否html
      * @param javaMailSender 发送对象
+     * @return 成功返回true，反之false
      */
-    public static void sendEmail(String from, String to, String subject, String text, boolean html, JavaMailSender javaMailSender) {
+    private boolean sendEmail(String from, String to, String subject, String text, boolean html, JavaMailSender javaMailSender) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         try {
@@ -48,7 +49,9 @@ public class MailUtil {
         } catch (MessagingException e) {
             e.printStackTrace();
             log.error("发送邮件失败 to={}", to);
+            return false;
         }
+        return true;
     }
 
     /**
@@ -61,8 +64,9 @@ public class MailUtil {
      * @param html           内容是否html
      * @param attachments    附件列表
      * @param javaMailSender 发送对象
+     * @return 成功返回true，反之false
      */
-    public static void sendEmail(String from, String to, String subject, String text, boolean html, Map<String, FileSystemResource> attachments, JavaMailSender javaMailSender) {
+    private boolean sendEmail(String from, String to, String subject, String text, boolean html, Map<String, FileSystemResource> attachments, JavaMailSender javaMailSender) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
@@ -83,7 +87,9 @@ public class MailUtil {
         } catch (MessagingException e) {
             e.printStackTrace();
             log.error("发送邮件失败 to={}", to);
+            return false;
         }
+        return true;
     }
 
 }
