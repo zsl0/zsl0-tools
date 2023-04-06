@@ -1,13 +1,15 @@
 package com.zsl0.util.auth;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 /**
@@ -16,10 +18,37 @@ import java.util.Base64;
  */
 public class CryptoUtil {
 
-    static Logger log = LoggerFactory.getLogger(CryptoUtil.class);
-
     private static final String ALGORITHM = "DESede"; // 使用的加密算法
     private static final String SECRET = "PUBLICSTATICVOIDMAINSTRINGARGS";    // 加密的盐
+
+    /**
+     * md5加密
+     * @param encode 明文
+     * @return 长度32的字符结果（16进制所表示字符串）
+     */
+    public static String md5Hex(String encode) {
+        byte[] digest = md5(encode.getBytes(StandardCharsets.UTF_8));
+        //16是表示转换为16进制数
+        return new BigInteger(1, digest).toString(16);
+    }
+
+    /**
+     * md5加密
+     * @param encode 明文
+     * @return 长度16的字节结果
+     */
+    public static byte[] md5(byte[] encode) {
+        MessageDigest md5;
+        byte[] digest;
+        try {
+            md5 = MessageDigest.getInstance("md5");
+            digest = md5.digest(encode);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        //16是表示转换为16进制数
+        return digest;
+    }
 
     /**
      * 对明文加密
@@ -122,5 +151,11 @@ public class CryptoUtil {
         System.out.println("decodeBase64: " + CryptoUtil.decodeBase64(secret));
 
         System.out.println(DigestUtils.md5Hex("admin".getBytes()));
+
+
+        System.out.println(md5Hex("zsl0"));
+        System.out.println(DigestUtils.md5Hex("zsl0".getBytes()));
+
+
     }
 }
